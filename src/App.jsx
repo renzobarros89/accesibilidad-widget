@@ -1,9 +1,16 @@
 import { useState } from "react";
-import "./App.css";
 import reactLogo from "./assets/react.svg";
-import GuiaLectura from "./components/GuiaLectura/GuiaLectura";
-import ReadTextButton from "./components/ReadText/ReadTextButton";
 import viteLogo from "/vite.svg";
+import "./App.css";
+import Accesibilidad from "./components/Accesibilidad";
+import ReadTextButton from "./components/ReadText/ReadTextButton";
+import GuiaLectura from "./components/GuiaLectura/GuiaLectura";
+
+const AccessibleTitle = ({ level, children }) => {
+  const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
+
+  return <HeadingTag aria-label={`Título ${level}`}>{children}</HeadingTag>;
+};
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +39,15 @@ function App() {
       </p>
       <ReadTextButton />
       <GuiaLectura />
+      <button onClick={() => setCount((count) => count + 1)}>
+        Resaltar titulos
+      </button>
+      <div>
+        <AccessibleTitle level={1}>Mi Título Principal</AccessibleTitle>
+        <AccessibleTitle level={2}>Subtítulo 1</AccessibleTitle>
+        <AccessibleTitle level={2}>Subtítulo 2</AccessibleTitle>
+      </div>
+      <Accesibilidad />
     </>
   );
 }
