@@ -1,10 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import Accesibilidad from "./components/Accesibilidad";
+
+const AccessibleTitle = ({ level, children }) => {
+  const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
+
+  return <HeadingTag aria-label={`Título ${level}`}>{children}</HeadingTag>;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -28,8 +35,17 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={() => setCount((count) => count + 1)}>
+        Resaltar titulos
+      </button>
+      <div>
+        <AccessibleTitle level={1}>Mi Título Principal</AccessibleTitle>
+        <AccessibleTitle level={2}>Subtítulo 1</AccessibleTitle>
+        <AccessibleTitle level={2}>Subtítulo 2</AccessibleTitle>
+      </div>
+      <Accesibilidad />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
