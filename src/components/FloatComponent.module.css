@@ -16,14 +16,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: white; /* Ajusta el color del título a blanco */
 }
 
 .titulo p {
   margin: 0;
-}
-
-p {
-  color: black;
 }
 
 .closeButton {
@@ -31,6 +28,7 @@ p {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  color: white; /* Ajusta el color del botón cerrar a blanco */
 }
 
 .itemContainer {
@@ -47,10 +45,15 @@ p {
   padding: 1rem;
   text-align: center;
   cursor: pointer;
-  border-radius: 8px; /* Ajusta el valor según lo redondeado que quieras los bordes */
+  border-radius: 8px;
+}
+
+/* Ajusta el color del texto y de los íconos dentro del bloque blanco */
+.item p,
+.item i {
+  color: black;
 }
 
 .icon {
   font-size: 32px;
-  color: tomato;
 }
