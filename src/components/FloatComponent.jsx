@@ -1,48 +1,38 @@
 import React from "react";
 import styles from "./FloatComponent.module.css";
-import {
-  CloseOutlined,
-  AudioOutlined,
-  AimOutlined,
-  BorderlessTableOutlined,
-  EyeOutlined,
-  GatewayOutlined,
-} from "@ant-design/icons";
-import { Button, Card, Row } from "antd";
 
 const FloatComponent = ({ setShowTable }) => {
   return (
     <div className={styles.floatComponent}>
-      <Row justify="space-between" className={styles.titulo}>
+      <div className={styles.titulo}>
         <p>Menú de Accesibilidad - Secretaría de Modernización</p>
-        <Button
-          shape="circle"
-          icon={<CloseOutlined />}
+        <button
+          className={styles.closeButton}
           onClick={() => setShowTable(false)}
-        />
-      </Row>
-      <Row justify="space-around">
-        <Card className={styles.item}>
-          <Button onClick={() => setShowTable(false)} type="link">
-            <AudioOutlined style={{ fontSize: "32px", color: "#08c" }} />
-            <p>Texto a voz</p>
-          </Button>
-        </Card>
-        <Card className={styles.item}>
-          <AimOutlined className={styles.icon} />
-        </Card>
-        <Card className={styles.item}>
-          <BorderlessTableOutlined className={styles.icon} />
-        </Card>
-        <Card className={styles.item}>
-          <EyeOutlined className={styles.icon} />
-        </Card>
-        <Card className={styles.item}>
-          <GatewayOutlined className={styles.icon} />
-        </Card>
-        <Card className={styles.item}></Card>
-        <Card className={styles.item}></Card>
-      </Row>
+        >
+          X
+        </button>
+      </div>
+      <div className={styles.itemContainer}>
+        <div className={styles.item} onClick={() => setShowTable(false)}>
+          <i className="fa-solid fa-volume-high"></i>
+          <p>Texto a voz</p>
+        </div>
+        <div className={styles.item}>
+          <i className="fa-solid fa-crosshairs"></i>
+        </div>
+        <div className={styles.item}>
+          <i className="fas fa-chart-bar"></i>
+        </div>
+        <div className={styles.item}>
+          <i className="fas fa-eye"></i>
+        </div>
+        <div className={styles.item}>
+          <i className="fas fa-globe"></i>
+        </div>
+        <div className={styles.item}></div>
+        <div className={styles.item}></div>
+      </div>
     </div>
   );
 };
