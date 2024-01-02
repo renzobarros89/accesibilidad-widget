@@ -1,10 +1,11 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import reactLogo from "./assets/react.svg";
 import Accesibilidad from "./components/Accesibilidad";
 import ReadTextButton from "./components/ReadText/ReadTextButton";
-import GuiaLectura from "./components/GuiaLectura/GuiaLectura";
+import ReadingGuide from "./components/ReadingGuide/ReadingGuide";
+import viteLogo from "/vite.svg";
+import HighlightLinksButton from "./components/HighlightLinksButton/HighlightLinksButton";
 
 const AccessibleTitle = ({ level, children }) => {
   const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
@@ -38,7 +39,8 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <ReadTextButton />
-      <GuiaLectura />
+      <ReadingGuide />
+      <HighlightLinksButton />
       <button onClick={() => setCount((count) => count + 1)}>
         Resaltar titulos
       </button>

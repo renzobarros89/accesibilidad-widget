@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const GuiaLectura = () => {
+const ReadingGuide = () => {
   const [buttonState, setButtonState] = useState("disabled");
   const [guideLinePosition, setGuideLinePosition] = useState(null);
 
@@ -77,4 +77,4 @@ const GuiaLectura = () => {
   );
 };
 
-export default GuiaLectura;
+export default ReadingGuide;
