@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-function ReadTextButton() {
-  const [active, setActive] = useState(false);
+function ReadTextButton({ active, setActive }) {
+  console.log(active);
+  //const [active, setActive] = useState(false);
 
   useEffect(() => {
     const speech = window.speechSynthesis;
