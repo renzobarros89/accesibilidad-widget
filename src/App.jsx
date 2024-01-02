@@ -6,6 +6,7 @@ import ReadTextButton from "./components/ReadText/ReadTextButton";
 import ReadingGuide from "./components/ReadingGuide/ReadingGuide";
 import viteLogo from "/vite.svg";
 import HighlightLinksButton from "./components/HighlightLinksButton/HighlightLinksButton";
+import IncreaseHeadingSizeButton from "./components/IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
 
 const AccessibleTitle = ({ level, children }) => {
   const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
@@ -41,9 +42,7 @@ function App() {
       <ReadTextButton />
       <ReadingGuide />
       <HighlightLinksButton />
-      <button onClick={() => setCount((count) => count + 1)}>
-        Resaltar titulos
-      </button>
+      <IncreaseHeadingSizeButton />
       <div>
         <AccessibleTitle level={1}>Mi Título Principal</AccessibleTitle>
         <AccessibleTitle level={2}>Subtítulo 1</AccessibleTitle>
