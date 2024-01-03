@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styles from "./FloatComponent.module.css";
 import ReadTextButton from "./ReadText/ReadTextButton";
+import HighlightLinksButton from "./HighlightLinksButton/HighlightLinksButton";
+import IncreaseHeadingSizeButton from "./IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
+import ReadingGuide from "./ReadingGuide/ReadingGuide";
 
 const FloatComponent = ({ showTable, setShowTable }) => {
-  const [readText, setReadText] = useState(false);
-
   return (
     <>
-      <ReadTextButton active={readText} setActive={setReadText} />
       <div
         className={styles.floatComponent}
         style={{ display: showTable ? "block" : "none" }}
@@ -22,30 +22,19 @@ const FloatComponent = ({ showTable, setShowTable }) => {
           </button>
         </div>
         <div className={styles.itemContainer}>
-          <div className={styles.item} onClick={() => setReadText(!readText)}>
-            <div
-              className={styles.inner}
-              style={{ display: readText ? "block" : "none" }}
-            >
-              <i className="fa-solid fa-check"></i>
-            </div>
-            <i className="fa-solid fa-volume-high"></i>
-            <p>Texto a voz</p>
-          </div>
-          <div className={styles.item}>
-            <i className="fa-solid fa-crosshairs"></i>
-          </div>
-          <div className={styles.item}>
-            <i className="fas fa-chart-bar"></i>
-          </div>
+          <ReadTextButton />
+          <HighlightLinksButton />
+          <IncreaseHeadingSizeButton />
+          <ReadingGuide />
           <div className={styles.item}>
             <i className="fas fa-eye"></i>
           </div>
           <div className={styles.item}>
             <i className="fas fa-globe"></i>
           </div>
-          <div className={styles.item}></div>
-          <div className={styles.item}></div>
+          <div className={styles.item}>
+            <i className="fa-solid fa-hashtag"></i>
+          </div>
         </div>
       </div>
     </>

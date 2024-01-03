@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import ButtonComponent from "../ButtonComponent";
 
 const ReadingGuide = () => {
+  const [guideLine, setGuideLine] = useState(false);
   const [buttonState, setButtonState] = useState("disabled");
   const [guideLinePosition, setGuideLinePosition] = useState(null);
 
@@ -21,22 +23,20 @@ const ReadingGuide = () => {
   };
 
   const handleMouseMove = (e) => {
-    if (buttonState === "generateGuideLine") {
+    if (guideLine) {
       setGuideLinePosition(e.clientY);
     }
   };
 
   useEffect(() => {
-    if (buttonState === "generateGuideLine") {
+    console.log(guideLine);
+    if (guideLine) {
       window.addEventListener("mousemove", handleMouseMove);
     } else {
+      setGuideLine(false);
       window.removeEventListener("mousemove", handleMouseMove);
     }
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [buttonState]);
+  }, [guideLine]);
 
   const buttonStyles =
     buttonState === "enlargeCursor"
@@ -47,33 +47,42 @@ const ReadingGuide = () => {
         }
       : {};
 
-  const guideLineStyles =
-    buttonState === "generateGuideLine" && guideLinePosition !== null
-      ? {
-          boxSizing: "border-box",
-          background: "#0d6efd",
-          width: "100vw",
-          position: "fixed",
-          height: "2px",
-          border: "solid 3px #0d6efd",
-          borderRadius: "5px",
-          top: `${guideLinePosition}px`,
-          left: 0,
-          zIndex: "2147483647",
-        }
-      : {};
+  const guideLineStyles = guideLine
+    ? {
+        boxSizing: "border-box",
+        background: "#0d6efd",
+        width: "100vw",
+        position: "fixed",
+        height: "2px",
+        border: "solid 3px #0d6efd",
+        borderRadius: "5px",
+        top: `${guideLinePosition}px`,
+        left: 0,
+        zIndex: "2147483647",
+      }
+    : {};
 
   return (
-    <div>
-      <button onClick={handleButtonClick} style={buttonStyles}>
-        {buttonState === "enlargeCursor"
-          ? "Agrandar Cursor"
-          : buttonState === "generateGuideLine"
-          ? "Generar Línea de Guía"
-          : "Desactivado"}
-      </button>
+    <>
+      <ButtonComponent
+        activate={guideLine}
+        setActivate={setGuideLine}
+        text="Línea de guia"
+        icon="fa-solid fa-underline"
+      />
       <div style={guideLineStyles}></div>
-    </div>
+      {/*
+      <div>
+        <button onClick={handleButtonClick} style={buttonStyles}>
+          {buttonState === "enlargeCursor"
+            ? "Agrandar Cursor"
+            : buttonState === "generateGuideLine"
+            ? "Generar Línea de Guía"
+            : "Desactivado"}
+        </button>
+        <div style={guideLineStyles}></div>
+      </div>*/}
+    </>
   );
 };
 

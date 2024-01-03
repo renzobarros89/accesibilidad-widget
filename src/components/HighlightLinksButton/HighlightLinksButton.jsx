@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ButtonComponent from "../ButtonComponent";
 
 function HighlightLinksAndButtonsButton() {
   const [highlight, setHighlight] = useState(false);
-
-  const handleClick = () => {
-    setHighlight(!highlight);
-
+  useEffect(() => {
     // Seleccionar tanto enlaces como botones
     const elementsToHighlight = document.querySelectorAll("a, button");
 
     elementsToHighlight.forEach((element) => {
       element.classList.toggle("highlighted", highlight);
     });
-  };
+  }, [highlight]);
 
   return (
-    <div>
-      <button onClick={handleClick}>
-        {highlight ? "Desactivar resaltado" : "Activar resaltado"}
-      </button>
+    <>
+      <ButtonComponent
+        activate={highlight}
+        setActivate={setHighlight}
+        text="Resaltar enlaces"
+        icon="fa-solid fa-hashtag"
+      />
       <style>
         {`
           .highlighted {
@@ -28,7 +29,7 @@ function HighlightLinksAndButtonsButton() {
           }
         `}
       </style>
-    </div>
+    </>
   );
 }
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import styles from "../FloatComponent.module.css";
+import ButtonComponent from "../ButtonComponent";
 
-function ReadTextButton({ active, setActive }) {
-  console.log(active);
-  //const [active, setActive] = useState(false);
-
+function ReadTextButton() {
+  const [active, setActive] = useState(false);
   useEffect(() => {
     const speech = window.speechSynthesis;
 
@@ -26,14 +26,13 @@ function ReadTextButton({ active, setActive }) {
     speech.speak(utterance);
   }
 
-  function handleClick() {
-    setActive(!active);
-  }
-
   return (
-    <button onClick={handleClick}>
-      {active ? "Desactivar lectura" : "Activar lectura"}
-    </button>
+    <ButtonComponent
+      activate={active}
+      setActivate={setActive}
+      text="Texto a voz"
+      icon="fa-solid fa-volume-high"
+    />
   );
 }
 
