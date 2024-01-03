@@ -8,6 +8,7 @@ import viteLogo from "/vite.svg";
 import HighlightLinksButton from "./components/HighlightLinksButton/HighlightLinksButton";
 import IncreaseHeadingSizeButton from "./components/IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
 import ColorChanger from "./components/ColorChanger/ColorChanger";
+import DislexiaToggle from "./components/DislexiaToggle/DislexiaToggle";
 
 const AccessibleTitle = ({ level, children }) => {
   const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
@@ -45,6 +46,7 @@ function App() {
       <HighlightLinksButton />
       <IncreaseHeadingSizeButton />
       <ColorChanger />
+      <DislexiaToggle />
       <div>
         <AccessibleTitle level={1}>Mi Título Principal</AccessibleTitle>
         <AccessibleTitle level={2}>Subtítulo 1</AccessibleTitle>
