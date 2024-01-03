@@ -10,6 +10,7 @@ import ReadTextButton from "./components/ReadText/ReadTextButton";
 import ReadingGuide from "./components/ReadingGuide/ReadingGuide";
 import viteLogo from "/vite.svg";
 import ContrasteComponent from "./components/ContrasteComponent/ContrasteComponent";
+import DaltonismoComponent from "./components/DaltonismoComponent/DaltonismoComponent";
 
 const AccessibleTitle = ({ level, children }) => {
   const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
@@ -49,6 +50,7 @@ function App() {
       <ColorChanger />
       <DislexiaToggle />
       <ContrasteComponent />
+      <DaltonismoComponent />
       <div>
         <AccessibleTitle level={1}>Mi Título Principal</AccessibleTitle>
         <AccessibleTitle level={2}>Subtítulo 1</AccessibleTitle>
