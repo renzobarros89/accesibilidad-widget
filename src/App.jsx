@@ -2,13 +2,14 @@ import { useState } from "react";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import Accesibilidad from "./components/Accesibilidad";
+import ColorChanger from "./components/ColorChanger/ColorChanger";
+import DislexiaToggle from "./components/DislexiaToggle/DislexiaToggle";
+import HighlightLinksButton from "./components/HighlightLinksButton/HighlightLinksButton";
+import IncreaseHeadingSizeButton from "./components/IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
 import ReadTextButton from "./components/ReadText/ReadTextButton";
 import ReadingGuide from "./components/ReadingGuide/ReadingGuide";
 import viteLogo from "/vite.svg";
-import HighlightLinksButton from "./components/HighlightLinksButton/HighlightLinksButton";
-import IncreaseHeadingSizeButton from "./components/IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
-import ColorChanger from "./components/ColorChanger/ColorChanger";
-import DislexiaToggle from "./components/DislexiaToggle/DislexiaToggle";
+import ContrasteComponent from "./components/ContrasteComponent/ContrasteComponent";
 
 const AccessibleTitle = ({ level, children }) => {
   const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
@@ -47,6 +48,7 @@ function App() {
       <IncreaseHeadingSizeButton />
       <ColorChanger />
       <DislexiaToggle />
+      <ContrasteComponent />
       <div>
         <AccessibleTitle level={1}>Mi Título Principal</AccessibleTitle>
         <AccessibleTitle level={2}>Subtítulo 1</AccessibleTitle>
