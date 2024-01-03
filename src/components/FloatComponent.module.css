@@ -26,7 +26,7 @@
 .closeButton {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   color: white; /* Ajusta el color del botón cerrar a blanco */
 }
@@ -53,6 +53,7 @@
   cursor: pointer;
   border-radius: 8px;
   position: relative;
+  font-size: 14px;
 }
 
 /* Ajusta el color del texto y de los íconos dentro del bloque blanco */
@@ -61,8 +62,9 @@
   color: black;
 }
 
-.icon {
-  font-size: 32px;
+.item > i {
+  color: #0653a5;
+  font-size: 36px;
 }
 
 .inner{
