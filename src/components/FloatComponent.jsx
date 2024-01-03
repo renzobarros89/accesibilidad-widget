@@ -3,6 +3,7 @@ import styles from "./FloatComponent.module.css";
 import ReadTextButton from "./ReadText/ReadTextButton";
 import HighlightLinksButton from "./HighlightLinksButton/HighlightLinksButton";
 import IncreaseHeadingSizeButton from "./IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
+import ReadingGuide from "./ReadingGuide/ReadingGuide";
 
 const FloatComponent = ({ showTable, setShowTable }) => {
   return (
@@ -24,6 +25,7 @@ const FloatComponent = ({ showTable, setShowTable }) => {
           <ReadTextButton />
           <HighlightLinksButton />
           <IncreaseHeadingSizeButton />
+          <ReadingGuide />
           <div className={styles.item}>
             <i className="fas fa-eye"></i>
           </div>
