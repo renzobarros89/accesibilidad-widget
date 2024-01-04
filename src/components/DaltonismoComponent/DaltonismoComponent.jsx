@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import styles from "../FloatComponent.module.css";
 
 const DaltonismoComponent = () => {
   const [tiposDaltonismo, setTiposDaltonismo] = useState([
@@ -39,14 +40,18 @@ const DaltonismoComponent = () => {
   };
 
   return (
-    <div>
-      <h2>Configuración de Daltonismo</h2>
-      <button onClick={cambiarTipoDaltonismo}>
-        {tiposDaltonismo[indiceTipoDaltonismo] || "Ninguno"}
-      </button>
-
-      <p>Ejemplo de texto con filtro de hue-rotate ajustado para daltonismo.</p>
-    </div>
+    <>
+      <div className={styles.item} onClick={cambiarTipoDaltonismo}>
+        <div
+          className={styles.inner}
+          style={{ display: indiceTipoDaltonismo !== 0 ? "block" : "none" }}
+        >
+          <i className="fa-solid fa-check"></i>
+        </div>
+        <i className="fas fa-eye"></i>
+        <p>{tiposDaltonismo[indiceTipoDaltonismo] || "Ninguno"}</p>
+      </div>
+    </>
   );
 };
 

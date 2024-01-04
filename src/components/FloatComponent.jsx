@@ -1,9 +1,12 @@
-import React, { useState } from "react";
 import styles from "./FloatComponent.module.css";
 import ReadTextButton from "./ReadText/ReadTextButton";
 import HighlightLinksButton from "./HighlightLinksButton/HighlightLinksButton";
 import IncreaseHeadingSizeButton from "./IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
 import ReadingGuide from "./ReadingGuide/ReadingGuide";
+import ColorChanger from "./ColorChanger/ColorChanger";
+import DislexiaToggle from "./DislexiaToggle/DislexiaToggle";
+import ContrasteComponent from "./ContrasteComponent/ContrasteComponent";
+import DaltonismoComponent from "./DaltonismoComponent/DaltonismoComponent";
 
 const FloatComponent = ({ showTable, setShowTable }) => {
   return (
@@ -26,15 +29,10 @@ const FloatComponent = ({ showTable, setShowTable }) => {
           <HighlightLinksButton />
           <IncreaseHeadingSizeButton />
           <ReadingGuide />
-          <div className={styles.item}>
-            <i className="fas fa-eye"></i>
-          </div>
-          <div className={styles.item}>
-            <i className="fas fa-globe"></i>
-          </div>
-          <div className={styles.item}>
-            <i className="fa-solid fa-hashtag"></i>
-          </div>
+          <ColorChanger />
+          <DislexiaToggle />
+          <ContrasteComponent />
+          <DaltonismoComponent />
         </div>
       </div>
     </>

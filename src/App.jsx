@@ -1,15 +1,7 @@
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import Accesibilidad from "./components/Accesibilidad";
-import ColorChanger from "./components/ColorChanger/ColorChanger";
-import DislexiaToggle from "./components/DislexiaToggle/DislexiaToggle";
-import HighlightLinksButton from "./components/HighlightLinksButton/HighlightLinksButton";
-import IncreaseHeadingSizeButton from "./components/IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
-import ReadTextButton from "./components/ReadText/ReadTextButton";
-import ReadingGuide from "./components/ReadingGuide/ReadingGuide";
 import viteLogo from "/vite.svg";
-import ContrasteComponent from "./components/ContrasteComponent/ContrasteComponent";
-import DaltonismoComponent from "./components/DaltonismoComponent/DaltonismoComponent";
 
 const AccessibleTitle = ({ level, children }) => {
   const HeadingTag = `h${level}`; // Determina la etiqueta del título según el nivel proporcionado
@@ -32,14 +24,6 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <ReadTextButton />
-      <ReadingGuide />
-      <HighlightLinksButton />
-      <IncreaseHeadingSizeButton />
-      <ColorChanger />
-      <DislexiaToggle />
-      <ContrasteComponent />
-      <DaltonismoComponent />
       <div>
         <AccessibleTitle level={1}>Mi Título Principal</AccessibleTitle>
         <AccessibleTitle level={2}>Subtítulo 1</AccessibleTitle>

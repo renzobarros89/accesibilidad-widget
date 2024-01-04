@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import styles from "../FloatComponent.module.css";
 
 const ColorChanger = () => {
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
-  const colors = ["blue", "red", "green", "orange", "white", "black"];
+  const colors = ["", "blue", "red", "green", "orange", "white", "black"];
 
   const handleColorChange = () => {
     const nextColorIndex = (currentColorIndex + 1) % colors.length;
@@ -19,15 +20,18 @@ const ColorChanger = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleColorChange}>Cambiar Color</button>
-      {/* Contenido de tu aplicación */}
-      <h1>Título</h1>
-      <p>Párrafo</p>
-      <button>Botón</button>
-      <a href="#">Enlace</a>
-      {/* Otros elementos de tu aplicación */}
-    </div>
+    <>
+      <div className={styles.item} onClick={handleColorChange}>
+        <div
+          className={styles.inner}
+          style={{ display: currentColorIndex !== 0 ? "block" : "none" }}
+        >
+          <i className="fa-solid fa-check"></i>
+        </div>
+        <i className="fa-solid fa-palette"></i>
+        <p>Cambiar color</p>
+      </div>
+    </>
   );
 };
 
