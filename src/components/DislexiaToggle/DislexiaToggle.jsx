@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import ButtonComponent from "../ButtonComponent";
 
 const DislexiaToggle = () => {
   const [isDyslexicFont, setDyslexicFont] = useState(false);
 
-  const handleButtonClick = () => {
+  useEffect(() => {
     const body = document.body;
     if (isDyslexicFont) {
-      body.style.fontFamily = ""; // Vuelve a la fuente original o elimina esta línea si no es necesario
-    } else {
       body.style.fontFamily = "Open-Dyslexic, sans-serif";
+    } else {
+      body.style.fontFamily = ""; // Vuelve a la fuente original o elimina esta línea si no es necesario
     }
-
-    setDyslexicFont(!isDyslexicFont);
-  };
+  }, [isDyslexicFont]);
 
   return (
-    <button onClick={handleButtonClick}>
-      {isDyslexicFont ? "Desactivar Dislexia" : "Activar Dislexia"}
-    </button>
+    <ButtonComponent
+      activate={isDyslexicFont}
+      setActivate={setDyslexicFont}
+      text="Dislexia"
+      icon="fa-solid fa-font"
+    />
   );
 };
 

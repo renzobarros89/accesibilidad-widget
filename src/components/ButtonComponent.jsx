@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./FloatComponent.module.css";
 
 const ButtonComponent = ({ activate, setActivate, text, icon }) => {

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import styles from "../FloatComponent.module.css";
 
 const ContrasteComponent = () => {
   const [estiloContraste, setEstiloContraste] = useState("");
@@ -46,13 +47,22 @@ const ContrasteComponent = () => {
   };
 
   return (
-    <div>
-      <button onClick={cambiarEstiloContraste}>
-        {estiloContraste
-          ? estiloContraste.charAt(0).toUpperCase() + estiloContraste.slice(1)
-          : "Normal"}
-      </button>
-    </div>
+    <>
+      <div className={styles.item} onClick={cambiarEstiloContraste}>
+        <div
+          className={styles.inner}
+          style={{ display: estiloContraste ? "block" : "none" }}
+        >
+          <i className="fa-solid fa-check"></i>
+        </div>
+        <i className="fa-solid fa-brush"></i>
+        <p>
+          {estiloContraste
+            ? estiloContraste.charAt(0).toUpperCase() + estiloContraste.slice(1)
+            : "Normal"}
+        </p>
+      </div>
+    </>
   );
 };
 
