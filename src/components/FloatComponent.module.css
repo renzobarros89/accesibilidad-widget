@@ -5,11 +5,11 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #007bff;
   z-index: 150;
 }
 
 .titulo {
+  background-color: #0653a5;
   padding: 1rem;
   font-size: 18px;
   font-weight: bolder;
@@ -21,6 +21,10 @@
 
 .titulo p {
   margin: 0;
+}
+
+.titulo img{
+  height: 50px;
 }
 
 .closeButton {
@@ -41,6 +45,7 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  background-color: #eff1f5;
 }
 
 .item {
@@ -54,6 +59,13 @@
   border-radius: 8px;
   position: relative;
   font-size: 14px;
+  border: solid transparent 2px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.item:hover{
+  border: solid 2px #0653a5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Ajusta el color del texto y de los íconos dentro del bloque blanco */

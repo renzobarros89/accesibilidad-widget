@@ -7,6 +7,7 @@ import ColorChanger from "./ColorChanger/ColorChanger";
 import DislexiaToggle from "./DislexiaToggle/DislexiaToggle";
 import ContrasteComponent from "./ContrasteComponent/ContrasteComponent";
 import DaltonismoComponent from "./DaltonismoComponent/DaltonismoComponent";
+import logo from "../assets/img/accesibilidad_blanco.png";
 
 const FloatComponent = ({ showTable, setShowTable }) => {
   return (
@@ -16,7 +17,7 @@ const FloatComponent = ({ showTable, setShowTable }) => {
         style={{ display: showTable ? "block" : "none" }}
       >
         <div className={styles.titulo}>
-          <p>Menú de Accesibilidad - Secretaría de Modernización</p>
+          <img src={logo} />
           <button
             className={styles.closeButton}
             onClick={() => setShowTable(false)}
