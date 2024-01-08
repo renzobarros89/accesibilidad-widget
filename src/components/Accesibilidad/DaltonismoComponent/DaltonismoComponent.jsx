@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../FloatComponent.module.css";
 
-const DaltonismoComponent = () => {
+const DaltonismoComponent = ({ reset, setReset }) => {
   const [tiposDaltonismo, setTiposDaltonismo] = useState([
     "",
     "protanopia",
@@ -32,12 +32,18 @@ const DaltonismoComponent = () => {
       case "monocromo":
         root.style.cssText = `filter: grayscale(100%) !important;`;
         break;
-      // Agrega más casos según sea necesario para otros tipos de daltonismo
       default:
-        // Restaurar el filtro predeterminado si no se selecciona un tipo de daltonismo
         root.style.cssText = `filter: none;`;
     }
   };
+
+  useEffect(() => {
+    if (reset) {
+      setIndiceTipoDaltonismo(0);
+      aplicarEstiloDaltonismo(""); // Restablecer el estilo a ninguno
+      setReset(false);
+    }
+  }, [reset, setReset]);
 
   return (
     <>
@@ -49,7 +55,7 @@ const DaltonismoComponent = () => {
           <i className="fa-solid fa-check"></i>
         </div>
         <i className="fas fa-eye"></i>
-        <p>{tiposDaltonismo[indiceTipoDaltonismo] || "Ninguno"}</p>
+        <p>{tiposDaltonismo[indiceTipoDaltonismo] || "Daltonismo"}</p>
       </div>
     </>
   );

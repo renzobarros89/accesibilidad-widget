@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-const DislexiaToggle = () => {
+const DislexiaToggle = ({ reset, setReset }) => {
   const [isDyslexicFont, setDyslexicFont] = useState(false);
+
+  useEffect(() => {
+    if (reset) {
+      setDyslexicFont(false);
+      setReset(false);
+    }
+  }, [reset]);
 
   useEffect(() => {
     const body = document.body;

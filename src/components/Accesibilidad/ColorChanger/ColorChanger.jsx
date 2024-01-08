@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../FloatComponent.module.css";
 
-const ColorChanger = () => {
+const ColorChanger = ({ reset, setReset }) => {
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
   const colors = ["", "blue", "red", "green", "orange", "white", "black"];
 
@@ -19,6 +19,14 @@ const ColorChanger = () => {
     });
   };
 
+  useEffect(() => {
+    if (reset) {
+      setCurrentColorIndex(0);
+      applyColorToElements(colors[0]);
+      setReset(false);
+    }
+  }, [reset]);
+
   return (
     <>
       <div className={styles.item} onClick={handleColorChange}>
@@ -29,7 +37,7 @@ const ColorChanger = () => {
           <i className="fa-solid fa-check"></i>
         </div>
         <i className="fa-solid fa-palette"></i>
-        <p>Cambiar color</p>
+        <p>Color fuente</p>
       </div>
     </>
   );

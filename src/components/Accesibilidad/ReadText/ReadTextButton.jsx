@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-function ReadTextButton() {
+function ReadTextButton({ reset, setReset }) {
   const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (reset) {
+      setActive(false);
+      setReset(false);
+    }
+  }, [reset]);
+
   useEffect(() => {
     const speech = window.speechSynthesis;
 

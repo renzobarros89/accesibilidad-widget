@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-function HighlightLinksAndButtonsButton() {
+function HighlightLinksAndButtonsButton({ reset, setReset }) {
   const [highlight, setHighlight] = useState(false);
+
+  useEffect(() => {
+    if (reset) {
+      setHighlight(false);
+      setReset(false);
+    }
+  }, [reset]);
+
   useEffect(() => {
     // Seleccionar tanto enlaces como botones
     const elementsToHighlight = document.querySelectorAll("a, button");
