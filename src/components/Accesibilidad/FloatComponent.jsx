@@ -12,6 +12,17 @@ import logoSecretaria from "./assets/img/secretaria.png";
 import ResetComponent from "./ResetComponent/ResetComponent";
 import { useState } from "react";
 
+const componentList = [
+  ReadTextButton,
+  HighlightLinksButton,
+  IncreaseHeadingSizeButton,
+  ReadingGuide,
+  ColorChanger,
+  DislexiaToggle,
+  ContrasteComponent,
+  DaltonismoComponent,
+];
+
 const FloatComponent = ({ showTable, setShowTable }) => {
   const [reset, setReset] = useState(false);
 
@@ -32,14 +43,9 @@ const FloatComponent = ({ showTable, setShowTable }) => {
         </div>
         <div className={styles.contenedor}>
           <div className={styles.itemContainer}>
-            <ReadTextButton reset={reset} setReset={setReset} />
-            <HighlightLinksButton reset={reset} setReset={setReset} />
-            <IncreaseHeadingSizeButton reset={reset} setReset={setReset} />
-            <ReadingGuide reset={reset} setReset={setReset} />
-            <ColorChanger reset={reset} setReset={setReset} />
-            <DislexiaToggle reset={reset} setReset={setReset} />
-            <ContrasteComponent reset={reset} setReset={setReset} />
-            <DaltonismoComponent reset={reset} setReset={setReset} />
+            {componentList.map((Component, index) => (
+              <Component key={index} reset={reset} setReset={setReset} />
+            ))}
           </div>
           <div className={styles.reset}>
             <ResetComponent setReset={setReset} />
