@@ -139,3 +139,21 @@
 .inner i{
   color: white;
 }
+
+@media screen and (max-width: 768px) {
+  .floatComponent {
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+
+  .contenedor {
+    flex-direction: column;
+  }
+
+  .itemContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: wrap;
+  }
+}
