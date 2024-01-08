@@ -1,0 +1,141 @@
+/* FloatComponent.module.css */
+
+.floatComponent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 150;
+}
+
+.titulo {
+  background-color: #222A59;
+  padding: 1rem;
+  font-size: 18px;
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white; /* Ajusta el color del título a blanco */
+}
+
+.titulo p {
+  margin: 0;
+}
+
+.titulo img{
+  height: 45px;
+}
+.reset img {
+  height: 40px;
+}
+.closeButton {
+  background-color: #222A59; /* Fondo azul oscuro */
+  font-size: 1rem;
+  cursor: pointer;
+  color: white; /* Contenido blanco */
+  border: none; /* Elimina el borde para que sea un círculo */
+  border-radius: 50%; /* Hace que el botón sea un círculo */
+  padding: 0.5rem 1rem; /* Ajusta el relleno según sea necesario */
+}
+
+.closeButton:focus {
+  outline: none;
+}
+
+.closeButton:hover {
+  border: 1px solid #ffffff;
+}
+
+
+.contenedor {
+  display: flex;
+  justify-content: space-between;
+  background-color: #eff1f5;
+}
+.itemContainer {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.item {
+  height: 70px;
+  width: 100px;
+  margin: 1rem;
+  background-color: #fff;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  position: relative;
+  font-size: 14px;
+  border: solid transparent 2px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+
+.item:hover{
+  border: solid 2px #222A59;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Ajusta el color del texto y de los íconos dentro del bloque blanco */
+.item p,
+.item i {
+  color: black;
+}
+
+.item > i {
+  color: #222A59;
+  font-size: 36px;
+}
+
+.reset {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.itemReset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 45px;
+  margin: 1rem;
+  background-color: #0076CE;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+  border: solid transparent 2px;
+  transition: box-shadow 0.3s ease-in-out;
+  align-self: center;
+}
+
+.itemReset:hover{
+  background-color: #222A59;
+  box-shadow: 0 0 10px #222A59
+}
+
+/* Ajusta el color del texto y de los íconos dentro del bloque blanco */
+.itemReset p,
+.itemReset i {
+  color: white;
+}
+
+.inner{
+  border-radius: 50%;
+  height: 22px;
+  width: 22px;
+  background-color: #0076CE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.inner i{
+  color: white;
+}

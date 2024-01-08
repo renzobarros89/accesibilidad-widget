@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-function IncreaseHeadingSizeButton() {
+function IncreaseHeadingSizeButton({ reset, setReset }) {
   const [increaseSize, setIncreaseSize] = useState(false);
+
+  useEffect(() => {
+    if (reset) {
+      setIncreaseSize(false);
+      setReset(false);
+    }
+  }, [reset]);
 
   return (
     <>
       <ButtonComponent
         activate={increaseSize}
         setActivate={setIncreaseSize}
-        text="Duplicar tamaño"
+        text="Tamaño fuente"
         icon="fa-solid fa-text-height"
       />
       <style>

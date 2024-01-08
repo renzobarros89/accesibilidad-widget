@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-const ReadingGuide = () => {
+const ReadingGuide = ({ reset, setReset }) => {
   const [guideLine, setGuideLine] = useState(false);
   const [guideLinePosition, setGuideLinePosition] = useState(null);
 
@@ -10,6 +10,13 @@ const ReadingGuide = () => {
       setGuideLinePosition(e.clientY);
     }
   };
+
+  useEffect(() => {
+    if (reset) {
+      setGuideLine(false);
+      setReset(false);
+    }
+  }, [reset]);
 
   useEffect(() => {
     if (guideLine) {

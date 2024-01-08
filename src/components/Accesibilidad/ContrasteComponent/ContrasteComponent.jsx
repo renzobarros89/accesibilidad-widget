@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../FloatComponent.module.css";
 
-const ContrasteComponent = () => {
+const ContrasteComponent = ({ reset, setReset }) => {
   const [estiloContraste, setEstiloContraste] = useState("");
 
   const cambiarEstiloContraste = () => {
@@ -41,6 +41,15 @@ const ContrasteComponent = () => {
     setEstiloContraste(nuevoEstiloContraste);
   };
 
+  useEffect(() => {
+    if (reset) {
+      // Restablecer el estado a su valor inicial
+      setEstiloContraste("");
+      aplicarEstiloContraste("");
+      setReset(false);
+    }
+  }, [reset, setReset]);
+
   const aplicarEstiloContraste = (estilo) => {
     const root = document.documentElement;
     root.style.cssText = estilo;
@@ -59,7 +68,7 @@ const ContrasteComponent = () => {
         <p>
           {estiloContraste
             ? estiloContraste.charAt(0).toUpperCase() + estiloContraste.slice(1)
-            : "Normal"}
+            : "Contraste"}
         </p>
       </div>
     </>
