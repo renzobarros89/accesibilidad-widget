@@ -1,21 +1,10 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import { viteStaticCopy } from "vite-plugin-static-copy";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/Accesibilidad-Component/",
-  plugins: [
-    react(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: "src/components/Accesibilidad/Accesibilidad.css",
-          dest: "",
-        },
-      ],
-    }),
-  ],
+  base: "/",
+  plugins: [react()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/main-widget.jsx"),
