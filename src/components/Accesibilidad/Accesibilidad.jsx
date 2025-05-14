@@ -6,6 +6,12 @@ const Accesibilidad = () => {
   const [showTable, setShowTable] = useState(false);
 
   useEffect(() => {
+    // Aplicar estilos :root al documento
+    const htmlElement = document.documentElement;
+    htmlElement.style.fontFamily =
+      "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif";
+    htmlElement.style.lineHeight = "1.5";
+
     const handleKeyPress = (event) => {
       if (event.altKey && event.key === "a") {
         setShowTable((prevShowTable) => !prevShowTable);
@@ -16,6 +22,9 @@ const Accesibilidad = () => {
 
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
+      // Opcional: limpiar estilos al desmontar el componente
+      htmlElement.style.fontFamily = "";
+      htmlElement.style.lineHeight = "";
     };
   }, []);
 

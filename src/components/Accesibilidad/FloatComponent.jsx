@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReadTextButton from "./ReadText/ReadTextButton";
 import HighlightLinksButton from "./HighlightLinksButton/HighlightLinksButton";
 import IncreaseHeadingSizeButton from "./IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
@@ -23,6 +23,25 @@ const componentList = [
 
 const FloatComponent = ({ showTable, setShowTable }) => {
   const [reset, setReset] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [currentCloseButtonStyle, setCurrentCloseButtonStyle] = useState({
+    backgroundColor: "#222a59",
+    fontSize: "1rem",
+    cursor: "pointer",
+    color: "white",
+    border: "1px solid #222a59",
+    borderRadius: "50%",
+    padding: "1rem 1.3rem",
+    transition: "border 0.3s ease",
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Estilos base
   const floatComponentStyles = {
@@ -45,24 +64,20 @@ const FloatComponent = ({ showTable, setShowTable }) => {
     color: "white",
   };
 
+  const headerMobileStyles = {
+    ...headerStyles,
+    justifyContent: "center",
+  };
+
   const columnStyles = {
     display: "flex",
     flexDirection: "row",
-  };
-
-  const closeButtonStyles = {
-    backgroundColor: "#222a59",
-    fontSize: "1rem",
-    cursor: "pointer",
-    color: "white",
-    border: "1px solid #222a59",
-    borderRadius: "50%",
-    padding: "1rem 1.3rem",
-    transition: "border 0.3s ease",
+    alignItems: "center",
+    gap: "1rem",
   };
 
   const closeButtonHoverStyles = {
-    ...closeButtonStyles,
+    ...currentCloseButtonStyle,
     border: "1px solid #ffffff",
   };
 
@@ -71,67 +86,80 @@ const FloatComponent = ({ showTable, setShowTable }) => {
     flexWrap: "wrap",
     justifyContent: "space-around",
     backgroundColor: "#eff1f5",
+    padding: "0.5rem 0",
   };
 
   const imageStyles = {
     height: "45px",
+    display: isMobile ? "none" : "block",
   };
 
-  const [currentCloseButtonStyle, setCurrentCloseButtonStyle] =
-    useState(closeButtonStyles);
-
   // Estilos responsive
-  const responsiveStyles =
-    window.innerWidth <= 768
-      ? {
-          floatComponent: {
-            ...floatComponentStyles,
-            maxHeight: "40vh",
-            overflowY: "auto",
-          },
-          itemIcon: {
-            fontSize: "25px",
-          },
-          ...(window.innerWidth <= 500 && {
-            header: {
-              ...headerStyles,
-              flexDirection: "column",
-              padding: "0.5rem",
-            },
-            column: {
-              ...columnStyles,
-              marginTop: "0.5rem",
-            },
-            closeButton: {
-              ...closeButtonStyles,
-              fontSize: "0.8rem",
-              padding: "0.3rem 0.6rem",
-            },
-            itemIcon: {
-              fontSize: "20px",
-            },
-          }),
-        }
-      : {
-          floatComponent: floatComponentStyles,
-          itemIcon: {
-            fontSize: "36px",
-          },
-        };
+  const responsiveStyles = isMobile
+    ? {
+        floatComponent: {
+          ...floatComponentStyles,
+          maxHeight: "35vh",
+          overflowY: "auto",
+        },
+        header: headerMobileStyles,
+        itemIcon: {
+          fontSize: "16px",
+        },
+        itemCard: {
+          height: "30px", // Reducido de 45px
+          width: "50px", // Reducido de 70px
+          margin: "0.2rem",
+          padding: "0.2rem",
+          fontSize: "8px", // Reducido de 9px
+        },
+        closeButton: {
+          ...currentCloseButtonStyle,
+          fontSize: "0.8rem",
+          padding: "0.5rem 0.8rem",
+        },
+      }
+    : {
+        floatComponent: {
+          ...floatComponentStyles,
+          maxHeight: "35vh",
+          overflowY: "auto",
+        },
+        header: headerStyles,
+        itemIcon: {
+          fontSize: "16px",
+        },
+        itemCard: {
+          height: "50px",
+          width: "80px",
+          margin: "0.3rem",
+          padding: "0.3rem",
+          fontSize: "10px",
+        },
+      };
 
   return (
     <div style={responsiveStyles.floatComponent}>
-      <div style={responsiveStyles.header || headerStyles}>
-        <img src={logoSecretaria} style={imageStyles} alt="Logo" />
-        <div style={responsiveStyles.column || columnStyles}>
+      <div style={responsiveStyles.header}>
+        {!isMobile && (
+          <img src={logoSecretaria} style={imageStyles} alt="Logo" />
+        )}
+        <div style={columnStyles}>
           <ResetComponent setReset={setReset} />
           <button
-            style={responsiveStyles.closeButton || currentCloseButtonStyle}
+            style={
+              isMobile ? responsiveStyles.closeButton : currentCloseButtonStyle
+            }
             onClick={() => setShowTable(false)}
             onMouseEnter={() =>
               setCurrentCloseButtonStyle(closeButtonHoverStyles)
             }
-            onMouseLeave={() => setCurrentCloseButtonStyle(closeButtonStyles)}
+            onMouseLeave={() =>
+              setCurrentCloseButtonStyle({
+                ...currentCloseButtonStyle,
+                border: "1px solid #222a59",
+              })
+            }
           >
             <i className="fa-solid fa-xmark"></i>
           </button>
@@ -139,7 +167,12 @@ const FloatComponent = ({ showTable, setShowTable }) => {
       </div>
       <div style={contenedorStyles}>
         {componentList.map((Component, index) => (
-          <Component key={index} reset={reset} setReset={setReset} />
+          <Component
+            key={index}
+            reset={reset}
+            setReset={setReset}
+            responsiveStyles={responsiveStyles}
+          />
         ))}
       </div>
     </div>
