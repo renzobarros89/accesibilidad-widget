@@ -5,6 +5,9 @@ import { defineConfig } from "vite";
 export default defineConfig({
   base: "/accesibilidad-widget/",
   plugins: [react()],
+  define: {
+    "process.env": {}, // Previene errores al referirse a process.env
+  },
   build: {
     lib: {
       entry: resolve(__dirname, "src/main-widget.jsx"),
