@@ -53,7 +53,7 @@ const ResetComponent = ({ setReset }) => {
         setCurrentTextStyle(textStyles);
       }}
     >
-      <p style={currentTextStyle}>Restableceeeeeeeeeeeer</p>
+      <p style={currentTextStyle}>Restablecer -</p>
     </div>
   );
 };
