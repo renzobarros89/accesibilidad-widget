@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ReadTextButton from "./ReadText/ReadTextButton";
 import HighlightLinksButton from "./HighlightLinksButton/HighlightLinksButton";
 import IncreaseHeadingSizeButton from "./IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
@@ -21,38 +21,30 @@ const componentList = [
   DaltonismoComponent,
 ];
 
-const FloatComponent = ({ showTable, setShowTable }) => {
+const FloatComponent = ({ showTable, setShowTable, isMobile }) => {
   const [reset, setReset] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [currentCloseButtonStyle, setCurrentCloseButtonStyle] = useState({
-    backgroundColor: "#222a59",
-    fontSize: "1rem",
-    cursor: "pointer",
-    color: "white",
-    border: "1px solid #222a59",
-    borderRadius: "50%",
-    padding: "1rem 1.3rem",
-    transition: "border 0.3s ease",
-  });
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Estilos base
-  const floatComponentStyles = {
+  // Estilos base del contenedor principal
+  const containerStyles = {
     position: "fixed",
     bottom: "0",
     left: "0",
     width: "100%",
     zIndex: "150",
     display: showTable ? "block" : "none",
+    backgroundColor: "#eff1f5",
+    boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.1)",
+    transition: "transform 0.3s ease",
+    transform: showTable ? "translateY(0)" : "translateY(100%)",
   };
 
+  // Estilos del contenido que empuja el resto de la página
+  const pagePaddingStyles = {
+    paddingBottom: showTable ? (isMobile ? "200px" : "35vh") : "0",
+    transition: "padding-bottom 0.3s ease",
+  };
+
+  // Estilos del header
   const headerStyles = {
     backgroundColor: "#222a59",
     padding: "1rem",
@@ -64,118 +56,63 @@ const FloatComponent = ({ showTable, setShowTable }) => {
     color: "white",
   };
 
-  const headerMobileStyles = {
-    ...headerStyles,
-    justifyContent: "center",
-  };
-
-  const columnStyles = {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: "1rem",
-  };
-
-  const closeButtonHoverStyles = {
-    ...currentCloseButtonStyle,
-    border: "1px solid #ffffff",
-  };
-
   const contenedorStyles = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    backgroundColor: "#eff1f5",
     padding: "0.5rem 0",
+    maxHeight: isMobile ? "200px" : "35vh",
+    overflowY: "auto",
   };
-
-  const imageStyles = {
-    height: "45px",
-    display: isMobile ? "none" : "block",
-  };
-
-  // Estilos responsive
-  const responsiveStyles = isMobile
-    ? {
-        floatComponent: {
-          ...floatComponentStyles,
-          maxHeight: "35vh",
-          overflowY: "auto",
-        },
-        header: headerMobileStyles,
-        itemIcon: {
-          fontSize: "16px",
-        },
-        itemCard: {
-          height: "30px", // Reducido de 45px
-          width: "50px", // Reducido de 70px
-          margin: "0.2rem",
-          padding: "0.2rem",
-          fontSize: "8px", // Reducido de 9px
-        },
-        closeButton: {
-          ...currentCloseButtonStyle,
-          fontSize: "0.8rem",
-          padding: "0.5rem 0.8rem",
-        },
-      }
-    : {
-        floatComponent: {
-          ...floatComponentStyles,
-          maxHeight: "35vh",
-          overflowY: "auto",
-        },
-        header: headerStyles,
-        itemIcon: {
-          fontSize: "16px",
-        },
-        itemCard: {
-          height: "50px",
-          width: "80px",
-          margin: "0.3rem",
-          padding: "0.3rem",
-          fontSize: "10px",
-        },
-      };
 
   return (
-    <div style={responsiveStyles.floatComponent}>
-      <div style={responsiveStyles.header}>
-        {!isMobile && (
-          <img src={logoSecretaria} style={imageStyles} alt="Logo" />
-        )}
-        <div style={columnStyles}>
-          <ResetComponent setReset={setReset} />
-          <button
-            style={
-              isMobile ? responsiveStyles.closeButton : currentCloseButtonStyle
-            }
-            onClick={() => setShowTable(false)}
-            onMouseEnter={() =>
-              setCurrentCloseButtonStyle(closeButtonHoverStyles)
-            }
-            onMouseLeave={() =>
-              setCurrentCloseButtonStyle({
-                ...currentCloseButtonStyle,
+    <>
+      {/* Este div aplica el padding al contenido principal */}
+      <div style={pagePaddingStyles} aria-hidden="true" />
+
+      {/* Panel de accesibilidad */}
+      <div style={containerStyles}>
+        <div style={headerStyles}>
+          {!isMobile && (
+            <img src={logoSecretaria} style={{ height: "45px" }} alt="Logo" />
+          )}
+          <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+            <ResetComponent setReset={setReset} />
+            <button
+              onClick={() => setShowTable(false)}
+              style={{
+                backgroundColor: "#222a59",
+                color: "white",
                 border: "1px solid #222a59",
-              })
-            }
-          >
-            <i className="fa-solid fa-xmark"></i>
-          </button>
+                borderRadius: "50%",
+                padding: "1rem 1.3rem",
+                cursor: "pointer",
+                transition: "border 0.3s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.border = "1px solid #ffffff")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.border = "1px solid #222a59")
+              }
+              aria-label="Cerrar menú de accesibilidad"
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <div style={contenedorStyles}>
+          {componentList.map((Component, index) => (
+            <Component
+              key={index}
+              reset={reset}
+              setReset={setReset}
+              isMobile={isMobile}
+            />
+          ))}
         </div>
       </div>
-      <div style={contenedorStyles}>
-        {componentList.map((Component, index) => (
-          <Component
-            key={index}
-            reset={reset}
-            setReset={setReset}
-            responsiveStyles={responsiveStyles}
-          />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 
