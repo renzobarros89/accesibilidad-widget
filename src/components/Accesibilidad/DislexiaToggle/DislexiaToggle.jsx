@@ -14,9 +14,9 @@ const DislexiaToggle = ({ reset, setReset }) => {
   useEffect(() => {
     const body = document.body;
     if (isDyslexicFont) {
-      body.style.fontFamily = "Open-Dyslexic, sans-serif";
+      body.classList.add("dyslexic-font");
     } else {
-      body.style.fontFamily = "";
+      body.classList.remove("dyslexic-font");
     }
   }, [isDyslexicFont]);
 

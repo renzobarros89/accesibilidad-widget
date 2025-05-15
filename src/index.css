@@ -1,4 +1,26 @@
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.dyslexic-font {
+  font-family: "Open-Dyslexic", sans-serif;
+}
+
+.dyslexic-font body {
+  font-family: inherit; /* Mantén la herencia de la fuente para los elementos hijos */
+}
+
+.dyslexic-font span,
+.dyslexic-font p,
+.dyslexic-font input,
+.dyslexic-font label,
+.dyslexic-font div,
+.dyslexic-font h1,
+.dyslexic-font h2,
+.dyslexic-font h3,
+.dyslexic-font h4,
+.dyslexic-font h5,
+.dyslexic-font h6 {
+  font-family: "Open-Dyslexic", sans-serif;
 }
