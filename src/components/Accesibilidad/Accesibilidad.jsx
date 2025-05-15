@@ -79,6 +79,40 @@ const Accesibilidad = () => {
 
   const [currentButtonStyle, setCurrentButtonStyle] = useState(buttonStyles);
 
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+
+    htmlElement.style.fontFamily =
+      "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif";
+    htmlElement.style.lineHeight = "1.5";
+
+    const handleKeyPress = (event) => {
+      if (event.altKey && event.key === "a") {
+        setShowTable((prevShowTable) => !prevShowTable);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+      htmlElement.style.fontFamily = "";
+      htmlElement.style.lineHeight = "";
+      htmlElement.style.paddingBottom = ""; // limpiar
+    };
+  }, []);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    const htmlElement = document.documentElement;
+
+    if (showTable && isMobile) {
+      htmlElement.style.paddingBottom = "150px"; // o la altura estimada de tu FloatComponent
+    } else {
+      htmlElement.style.paddingBottom = "";
+    }
+  }, [showTable]);
+
   return (
     <>
       <FloatComponent showTable={showTable} setShowTable={setShowTable} />
