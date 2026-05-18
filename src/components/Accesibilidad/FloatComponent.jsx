@@ -7,173 +7,142 @@ import ColorChanger from "./ColorChanger/ColorChanger";
 import DislexiaToggle from "./DislexiaToggle/DislexiaToggle";
 import ContrasteComponent from "./ContrasteComponent/ContrasteComponent";
 import DaltonismoComponent from "./DaltonismoComponent/DaltonismoComponent";
-import logoSecretaria from "./assets/img/modernizacion_blanco.png";
 import ResetComponent from "./ResetComponent/ResetComponent";
 
 const componentList = [
-  ReadTextButton,
   HighlightLinksButton,
-  IncreaseHeadingSizeButton,
-  ReadingGuide,
-  ColorChanger,
   DislexiaToggle,
   ContrasteComponent,
   DaltonismoComponent,
+  ReadingGuide,
+  ColorChanger,
+  IncreaseHeadingSizeButton,
+  ReadTextButton,
 ];
 
 const FloatComponent = ({ showTable, setShowTable }) => {
   const [reset, setReset] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [currentCloseButtonStyle, setCurrentCloseButtonStyle] = useState({
-    backgroundColor: "#222a59",
-    fontSize: "1rem",
-    cursor: "pointer",
-    color: "white",
-    border: "1px solid #222a59",
-    borderRadius: "50%",
-    padding: "1rem 1.3rem",
-    transition: "border 0.3s ease",
-  });
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth <= 640);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Estilos base
-  const floatComponentStyles = {
-    position: "fixed",
-    bottom: "0",
-    left: "0",
-    width: "100%",
-    zIndex: "150",
-    display: showTable ? "block" : "none",
-  };
-
-  const headerStyles = {
-    backgroundColor: "#222a59",
-    padding: "1rem",
-    fontSize: "18px",
-    fontWeight: "bolder",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    color: "white",
-  };
-
-  const headerMobileStyles = {
-    ...headerStyles,
-    justifyContent: "center",
-  };
-
-  const columnStyles = {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: "1rem",
-  };
-
-  const closeButtonHoverStyles = {
-    ...currentCloseButtonStyle,
-    border: "1px solid #ffffff",
-  };
-
-  const contenedorStyles = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    backgroundColor: "#eff1f5",
-    padding: "0.5rem 0",
-  };
-
-  const imageStyles = {
-    height: "45px",
-    display: isMobile ? "none" : "block",
-  };
-
-  // Estilos responsive
-  const responsiveStyles = isMobile
-    ? {
-        floatComponent: {
-          ...floatComponentStyles,
-          maxHeight: "35vh",
-          overflowY: "auto",
-        },
-        header: headerMobileStyles,
-        itemIcon: {
-          fontSize: "16px",
-        },
-        itemCard: {
-          height: "30px", // Reducido de 45px
-          width: "50px", // Reducido de 70px
-          margin: "0.2rem",
-          padding: "0.2rem",
-          fontSize: "8px", // Reducido de 9px
-        },
-        closeButton: {
-          ...currentCloseButtonStyle,
-          fontSize: "0.8rem",
-          padding: "0.5rem 0.8rem",
-        },
+  // Cerrar con Escape
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && showTable) {
+        setShowTable(false);
       }
-    : {
-        floatComponent: {
-          ...floatComponentStyles,
-          maxHeight: "35vh",
-          overflowY: "auto",
-        },
-        header: headerStyles,
-        itemIcon: {
-          fontSize: "16px",
-        },
-        itemCard: {
-          height: "50px",
-          width: "80px",
-          margin: "0.3rem",
-          padding: "0.3rem",
-          fontSize: "10px",
-        },
-      };
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [showTable, setShowTable]);
+
+  // IMPORTANTE: NO usar transform en el popup — rompe position:fixed de los hijos
+  // (la línea guía y otros overlays quedan atrapados en el contexto del popup).
+  // Se anima solo con opacity + bottom para preservar el comportamiento fixed.
+  const popupStyle = {
+    position: "fixed",
+    bottom: showTable
+      ? isMobile
+        ? "82px"
+        : "90px"
+      : isMobile
+        ? "74px"
+        : "82px",
+    right: isMobile ? "12px" : "16px",
+    width: isMobile
+      ? "min(260px, calc(100vw - 24px))"
+      : "min(300px, calc(100vw - 32px))",
+    maxHeight: isMobile ? "44vh" : "min(520px, calc(100vh - 120px))",
+    backgroundColor: "white",
+    borderRadius: "12px",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08)",
+    overflow: "hidden",
+    zIndex: 200,
+    display: "flex",
+    flexDirection: "column",
+    opacity: showTable ? 1 : 0,
+    transition: "opacity 0.2s ease, bottom 0.2s ease",
+    pointerEvents: showTable ? "auto" : "none",
+    fontFamily: "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+  };
+
+  const variant = isMobile ? "list-compact" : "list";
+
+  const headerStyle = {
+    backgroundColor: "#222a59",
+    color: "white",
+    padding: isMobile ? "10px 12px" : "14px 16px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexShrink: 0,
+  };
+
+  const titleStyle = {
+    fontSize: isMobile ? "13px" : "15px",
+    fontWeight: "700",
+    margin: 0,
+    lineHeight: "1.3",
+  };
+
+  const closeButtonStyle = {
+    background: "none",
+    border: "none",
+    color: "white",
+    cursor: "pointer",
+    padding: "4px 8px",
+    borderRadius: "6px",
+    fontSize: "16px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  };
+
+  const listStyle = {
+    overflowY: "auto",
+    flex: 1,
+  };
 
   return (
-    <div style={responsiveStyles.floatComponent}>
-      <div style={responsiveStyles.header}>
-        {!isMobile && (
-          <img src={logoSecretaria} style={imageStyles} alt="Logo" />
-        )}
-        <div style={columnStyles}>
-          <ResetComponent setReset={setReset} />
-          <button
-            style={
-              isMobile ? responsiveStyles.closeButton : currentCloseButtonStyle
-            }
-            onClick={() => setShowTable(false)}
-            onMouseEnter={() =>
-              setCurrentCloseButtonStyle(closeButtonHoverStyles)
-            }
-            onMouseLeave={() =>
-              setCurrentCloseButtonStyle({
-                ...currentCloseButtonStyle,
-                border: "1px solid #222a59",
-              })
-            }
-          >
-            <i className="fa-solid fa-xmark"></i>
-          </button>
-        </div>
+    <div
+      style={popupStyle}
+      role="dialog"
+      aria-label="Panel de accesibilidad"
+      aria-hidden={!showTable}
+    >
+      <div style={headerStyle}>
+        <h2 style={titleStyle}>Herramientas de accesibilidad</h2>
+        <button
+          style={closeButtonStyle}
+          onClick={() => setShowTable(false)}
+          aria-label="Cerrar panel"
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.2)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "transparent")
+          }
+        >
+          <i className="fa-solid fa-xmark" />
+        </button>
       </div>
-      <div style={contenedorStyles}>
+
+      <div style={listStyle}>
         {componentList.map((Component, index) => (
           <Component
             key={index}
             reset={reset}
             setReset={setReset}
-            responsiveStyles={responsiveStyles}
+            variant={variant}
           />
         ))}
+        <ResetComponent setReset={setReset} variant={variant} />
       </div>
     </div>
   );

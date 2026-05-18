@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-function HighlightLinksAndButtonsButton({ reset, setReset }) {
+function HighlightLinksAndButtonsButton({ reset, setReset, variant }) {
   const [highlight, setHighlight] = useState(false);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function HighlightLinksAndButtonsButton({ reset, setReset }) {
         setActivate={setHighlight}
         text="Resaltar enlaces"
         icon="fa-solid fa-hashtag"
+        variant={variant}
       />
       <style>
         {`

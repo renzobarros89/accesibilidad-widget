@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-const DaltonismoComponent = ({ reset, setReset }) => {
+const DaltonismoComponent = ({ reset, setReset, variant }) => {
   const tiposDaltonismo = [
     "",
     "protanopia",
@@ -23,19 +23,19 @@ const DaltonismoComponent = ({ reset, setReset }) => {
     const root = document.documentElement;
     switch (tipo) {
       case "protanopia":
-        root.style.cssText = `filter: hue-rotate(30deg) !important;`;
+        root.style.filter = "hue-rotate(30deg)";
         break;
       case "deuteranopia":
-        root.style.cssText = `filter: hue-rotate(60deg) !important;`;
+        root.style.filter = "hue-rotate(60deg)";
         break;
       case "tritanopia":
-        root.style.cssText = `filter: hue-rotate(120deg) !important;`;
+        root.style.filter = "hue-rotate(120deg)";
         break;
       case "monocromo":
-        root.style.cssText = `filter: grayscale(100%) !important;`;
+        root.style.filter = "grayscale(100%)";
         break;
       default:
-        root.style.cssText = `filter: none;`;
+        root.style.filter = "";
     }
   };
 
@@ -54,6 +54,7 @@ const DaltonismoComponent = ({ reset, setReset }) => {
       setActivate={cambiarTipoDaltonismo}
       text={tiposDaltonismo[indiceTipoDaltonismo] || "Daltonismo"}
       icon="fas fa-eye"
+      variant={variant}
     />
   );
 };

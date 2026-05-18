@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-const ResetComponent = ({ setReset }) => {
+const ResetComponent = ({ setReset, variant }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   // Estilos base
   const itemStyles = {
     display: "flex",
@@ -17,14 +19,12 @@ const ResetComponent = ({ setReset }) => {
     marginLeft: "1rem",
   };
 
-  // Estilos para hover
   const itemHoverStyles = {
     ...itemStyles,
     backgroundColor: "#f0f0f0",
     boxShadow: "0 0 5px #ffffff",
   };
 
-  // Estilos para el texto
   const textStyles = {
     color: "white",
     margin: "0",
@@ -36,9 +36,62 @@ const ResetComponent = ({ setReset }) => {
     color: "#222a59",
   };
 
-  // Estados para manejar hover
   const [currentItemStyle, setCurrentItemStyle] = useState(itemStyles);
   const [currentTextStyle, setCurrentTextStyle] = useState(textStyles);
+
+  // Variante lista y lista compacta
+  if (variant === "list" || variant === "list-compact") {
+    const compact = variant === "list-compact";
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: compact ? "9px" : "12px",
+          padding: compact ? "7px 12px" : "10px 16px",
+          cursor: "pointer",
+          backgroundColor: isHovered ? "#fff5f5" : "white",
+          borderLeft: "3px solid transparent",
+          borderTop: "1px solid #e8eef8",
+          userSelect: "none",
+          transition: "background-color 0.15s",
+        }}
+        onClick={() => setReset(true)}
+        role="button"
+        aria-label="Restablecer todas las herramientas"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div
+          style={{
+            width: compact ? "26px" : "32px",
+            height: compact ? "26px" : "32px",
+            borderRadius: "50%",
+            backgroundColor: "#fee2e2",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
+        >
+          <i
+            className="fa-solid fa-rotate-left"
+            style={{ color: "#dc2626", fontSize: compact ? "11px" : "13px" }}
+          />
+        </div>
+        <span
+          style={{
+            fontSize: compact ? "13px" : "14px",
+            color: "#dc2626",
+            fontWeight: "500",
+            flex: 1,
+          }}
+        >
+          Restablecer todo
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div

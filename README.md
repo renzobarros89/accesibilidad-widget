@@ -1,13 +1,14 @@
 # 🎯 Widget de Accesibilidad Web
 
-**Widget para mejorar la accesibilidad** en sitios web, con herramientas para usuarios con dislexia, problemas de visión y diversas preferencias visuales. Se integra como un botón flotante que despliega un panel de herramientas en la parte inferior de la pantalla.
+**Widget para mejorar la accesibilidad** en sitios web, con herramientas para usuarios con dislexia, problemas de visión y diversas preferencias visuales. Se integra como un botón flotante que despliega un panel compacto en la esquina inferior derecha.
 
 ## 🌟 Características generales
 
 - ✅ Botón flotante fijo en la esquina inferior derecha
-- ✅ Panel de herramientas fijo en la parte inferior de la pantalla
+- ✅ Panel compacto flotante con scroll interno
 - ✅ Atajo de teclado `Alt + A` para abrir/cerrar el panel
-- ✅ Diseño responsive (adaptado para móviles ≤ 768px)
+- ✅ Tecla `Escape` para cerrar el panel
+- ✅ Diseño responsive (panel más compacto en móviles ≤ 640px)
 - ✅ Botón de restablecimiento global para volver a los ajustes originales
 - ✅ Compatible con la mayoría de frameworks (React, Angular, Vue, HTML plano)
 
@@ -31,15 +32,15 @@ Resalta visualmente todos los `<a>` y `<button>` de la página aplicándoles:
 
 ---
 
-### 🔡 Tamaño de fuente / Encabezados
+### Encabezados grandes
 
-Amplía el tamaño de los encabezados (`h1`, `h2`, `h3`, `h4`) al **400%** para mejorar la legibilidad. Se puede activar y desactivar.
+Amplía el tamaño de los encabezados (`h1`, `h2`, `h3`, `h4`) al **400%** para mejorar la jerarquía visual del contenido. Se puede activar y desactivar.
 
 ---
 
-### 📏 Línea de guía de lectura
+### 📏 Guía de lectura
 
-Muestra una línea horizontal azul que sigue el cursor del ratón a lo largo de la pantalla, facilitando el seguimiento de líneas de texto durante la lectura.
+Muestra una línea horizontal azul que sigue el cursor del ratón a lo largo de **toda la pantalla**, facilitando el seguimiento de líneas de texto durante la lectura.
 
 ---
 
@@ -143,6 +144,109 @@ Añade estas reglas a tu archivo CSS principal:
 
 ---
 
+## 🔌 Integración en otros proyectos
+
+### Opción A — HTML / sitio estático (vía CDN)
+
+Agregá esto en cualquier página HTML. No requiere ningún framework ni instalación.
+
+**En el `<head>`:**
+
+```html
+<link href="https://fonts.cdnfonts.com/css/open-dyslexic" rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+```
+
+**Antes del `</body>`:**
+
+```html
+<script src="https://renzobarros89.github.io/accesibilidad-widget/widget-accesibilidad.iife.js"></script>
+```
+
+**CSS mínimo requerido** (en tu archivo CSS principal):
+
+```css
+.dyslexic-font,
+.dyslexic-font * {
+  font-family: "Open-Dyslexic", sans-serif !important;
+}
+.contrast-dark,
+.contrast-dark * {
+  background-color: #000 !important;
+  color: #50d0a0 !important;
+  border-color: #fff !important;
+}
+.contrast-light,
+.contrast-light * {
+  background-color: #fff !important;
+  color: #000 !important;
+  border-color: #000 !important;
+}
+```
+
+> Sin este CSS los modos de contraste oscuro/claro y la fuente para dislexia no funcionarán. El resto de herramientas funciona sin CSS adicional.
+
+---
+
+### Opción B — React / Vite (importación directa)
+
+Copiá la carpeta `src/components/Accesibilidad/` completa a tu proyecto y usá el componente directamente:
+
+```jsx
+import Accesibilidad from "./components/Accesibilidad/Accesibilidad";
+
+function App() {
+  return (
+    <>
+      {/* tu contenido */}
+      <Accesibilidad />
+    </>
+  );
+}
+```
+
+**Dependencias externas requeridas** en tu `index.html`:
+
+```html
+<link href="https://fonts.cdnfonts.com/css/open-dyslexic" rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+```
+
+**CSS requerido** en tu archivo global (ej. `index.css`):
+
+```css
+.dyslexic-font,
+.dyslexic-font * {
+  font-family: "Open-Dyslexic", sans-serif !important;
+}
+.contrast-dark,
+.contrast-dark * {
+  background-color: #000 !important;
+  color: #50d0a0 !important;
+  border-color: #fff !important;
+}
+.contrast-light,
+.contrast-light * {
+  background-color: #fff !important;
+  color: #000 !important;
+  border-color: #000 !important;
+}
+```
+
+---
+
+### Opción C — npm (próximamente)
+
+Consultá el archivo [`PUBLISH-NPM.md`](./PUBLISH-NPM.md) para los pasos de publicación y uso vía `npm install`.
+
+---
+
 ## ⚙️ Uso en desarrollo
 
 ```bash
@@ -168,12 +272,12 @@ src/
   components/
     Accesibilidad/
       Accesibilidad.jsx           # Componente raíz con botón flotante
-      FloatComponent.jsx          # Panel inferior con todas las herramientas
+      FloatComponent.jsx          # Panel flotante con todas las herramientas
       ButtonComponent.jsx         # Botón reutilizable para cada herramienta
       ColorChanger/               # Cambio de color de fuente
       ContrasteComponent/         # Modos de contraste
       DaltonismoComponent/        # Filtros para daltonismo
-      DislexiaToggle/             # Fuente OpenDyslexic
+      DislexiaToggle/             # Fuente OpenDyslexic (fuente para dislexia)
       HighlightLinksButton/       # Resaltado de enlaces y botones
       IncreaseHeadingSizeButton/  # Aumento de tamaño de encabezados
       ReadingGuide/               # Línea de guía de lectura

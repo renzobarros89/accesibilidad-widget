@@ -1,6 +1,43 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
+}
+
+/* Reducir animaciones */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Modos de contraste */
+.contrast-dark,
+.contrast-dark * {
+  background-color: rgb(0, 0, 0) !important;
+  border-color: rgb(255, 255, 255) !important;
+  color: rgb(80, 208, 160) !important;
+}
+
+.contrast-light,
+.contrast-light * {
+  background-color: rgb(255, 255, 255) !important;
+  border-color: rgb(0, 0, 0) !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 .dyslexic-font {
