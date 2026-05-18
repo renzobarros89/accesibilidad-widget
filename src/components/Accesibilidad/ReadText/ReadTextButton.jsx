@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-function ReadTextButton({ reset, setReset }) {
+function ReadTextButton({ reset, setReset, variant }) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ function ReadTextButton({ reset, setReset }) {
       setActive(false);
       setReset(false);
     }
-  }, [reset]);
+  }, [reset, setReset]);
 
   useEffect(() => {
     const speech = window.speechSynthesis;
@@ -39,6 +39,7 @@ function ReadTextButton({ reset, setReset }) {
       setActivate={setActive}
       text="Texto a voz"
       icon="fa-solid fa-volume-high"
+      variant={variant}
     />
   );
 }

@@ -1,48 +1,29 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-const ContrasteComponent = ({ reset, setReset }) => {
+const ContrasteComponent = ({ reset, setReset, variant }) => {
   const [estiloContraste, setEstiloContraste] = useState("");
 
   const cambiarEstiloContraste = () => {
-    let nuevoEstiloContraste = "";
-
-    switch (estiloContraste) {
-      case "":
-        nuevoEstiloContraste = "invertido";
-        aplicarEstiloContraste(`filter: invert(1)`);
-        break;
-      case "invertido":
-        nuevoEstiloContraste = "oscuro";
-        aplicarEstiloContraste(`
-          background-color: rgb(0, 0, 0) !important;
-          border-color: rgb(255, 255, 255) !important;
-          color: rgb(80, 208, 160) !important;
-        `);
-        break;
-      case "oscuro":
-        nuevoEstiloContraste = "claro";
-        aplicarEstiloContraste(`
-          background-color: rgb(255, 255, 255) !important;
-          border-color: rgb(0, 0, 0) !important;
-          color: rgb(0, 0, 0) !important;
-        `);
-        break;
-      case "claro":
-        nuevoEstiloContraste = "";
-        aplicarEstiloContraste("");
-        break;
-      default:
-        nuevoEstiloContraste = "invertido";
-        aplicarEstiloContraste("");
-    }
-
-    setEstiloContraste(nuevoEstiloContraste);
+    const modos = ["", "invertido", "oscuro", "claro"];
+    const idx = modos.indexOf(estiloContraste);
+    const siguiente = modos[(idx + 1) % modos.length];
+    setEstiloContraste(siguiente);
+    aplicarEstiloContraste(siguiente);
   };
 
-  const aplicarEstiloContraste = (estilo) => {
+  const aplicarEstiloContraste = (modo) => {
     const root = document.documentElement;
-    root.style.cssText = estilo;
+    root.style.filter = "";
+    root.classList.remove("contrast-dark", "contrast-light");
+
+    if (modo === "invertido") {
+      root.style.filter = "invert(1)";
+    } else if (modo === "oscuro") {
+      root.classList.add("contrast-dark");
+    } else if (modo === "claro") {
+      root.classList.add("contrast-light");
+    }
   };
 
   useEffect(() => {
@@ -63,6 +44,7 @@ const ContrasteComponent = ({ reset, setReset }) => {
           : "Contraste"
       }
       icon="fa-solid fa-brush"
+      variant={variant}
     />
   );
 };

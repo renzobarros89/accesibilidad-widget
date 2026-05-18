@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-const ColorChanger = ({ reset, setReset }) => {
+const ColorChanger = ({ reset, setReset, variant }) => {
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
   const colors = ["", "blue", "red", "green", "orange", "white", "black"];
 
@@ -34,6 +34,7 @@ const ColorChanger = ({ reset, setReset }) => {
       setActivate={handleColorChange}
       text="Color fuente"
       icon="fa-solid fa-palette"
+      variant={variant}
     />
   );
 };

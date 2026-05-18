@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-function IncreaseHeadingSizeButton({ reset, setReset }) {
+function IncreaseHeadingSizeButton({ reset, setReset, variant }) {
   const [increaseSize, setIncreaseSize] = useState(false);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ function IncreaseHeadingSizeButton({ reset, setReset }) {
       setIncreaseSize(false);
       setReset(false);
     }
-  }, [reset]);
+  }, [reset, setReset]);
 
   return (
     <>
@@ -18,6 +18,7 @@ function IncreaseHeadingSizeButton({ reset, setReset }) {
         setActivate={setIncreaseSize}
         text="Tamaño fuente"
         icon="fa-solid fa-text-height"
+        variant={variant}
       />
       <style>
         {`

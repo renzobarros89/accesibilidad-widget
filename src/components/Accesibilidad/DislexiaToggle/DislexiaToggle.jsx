@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "../ButtonComponent";
 
-const DislexiaToggle = ({ reset, setReset }) => {
+const DislexiaToggle = ({ reset, setReset, variant }) => {
   const [isDyslexicFont, setDyslexicFont] = useState(false);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ const DislexiaToggle = ({ reset, setReset }) => {
       setDyslexicFont(false);
       setReset(false);
     }
-  }, [reset]);
+  }, [reset, setReset]);
 
   useEffect(() => {
     const body = document.body;
@@ -24,8 +24,9 @@ const DislexiaToggle = ({ reset, setReset }) => {
     <ButtonComponent
       activate={isDyslexicFont}
       setActivate={setDyslexicFont}
-      text="Dislexia"
+      text="Fuente para dislexia"
       icon="fa-solid fa-font"
+      variant={variant}
     />
   );
 };
