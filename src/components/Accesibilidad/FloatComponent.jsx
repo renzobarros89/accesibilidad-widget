@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ReadTextButton from "./ReadText/ReadTextButton";
 import HighlightLinksButton from "./HighlightLinksButton/HighlightLinksButton";
-import IncreaseHeadingSizeButton from "./IncreaseHeadingSizeButton/IncreaseHeadingSizeButton";
+import FontSizeControl from "./FontSizeControl/FontSizeControl";
 import ReadingGuide from "./ReadingGuide/ReadingGuide";
 import ColorChanger from "./ColorChanger/ColorChanger";
 import DislexiaToggle from "./DislexiaToggle/DislexiaToggle";
@@ -10,14 +10,14 @@ import DaltonismoComponent from "./DaltonismoComponent/DaltonismoComponent";
 import ResetComponent from "./ResetComponent/ResetComponent";
 
 const componentList = [
+  FontSizeControl,
+  ReadTextButton,
   HighlightLinksButton,
   DislexiaToggle,
   ContrasteComponent,
   DaltonismoComponent,
   ReadingGuide,
   ColorChanger,
-  IncreaseHeadingSizeButton,
-  ReadTextButton,
 ];
 
 const FloatComponent = ({ showTable, setShowTable }) => {
